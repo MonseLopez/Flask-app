@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola Mundo con Flask</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
-<body>
-    <div class="container">
-        <h1>¡Hola Mundo con Flask!</h1>
-        <p>Esta es una aplicación web simple con diseño.</p>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block breadcrumbs %}Inicio{% endblock %}
+
+{% block content %}
+<h1>Bienvenido a Flask App</h1>
+<p>Esta es una página creada con Flask.</p>
+{% endblock %}
+
