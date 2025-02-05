@@ -1,43 +1,27 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"  # Necesario para usar `flash` mensajes
 
-# Página principal
-@app.route("/")
-def index():
-    return render_template("index.html")
+@app.route('/')
+def home():
+    return render_template('form.html')
 
-# Página con formulario avanzado
-@app.route("/form", methods=["GET", "POST"])
+@app.route('/form', methods=['POST'])
 def form():
-    if request.method == "POST":
-        # Validación de datos
-        name = request.form.get("name")
-        email = request.form.get("email")
-        age = request.form.get("age")
-        password = request.form.get("password")
-        gender = request.form.get("gender")
-        terms = request.form.get("terms")
+    name = request.form.get('name')
+    email = request.form.get('email')
+    birthdate = request.form.get('birthdate')
+    gender = request.form.get('gender')
 
-        # Validaciones básicas en el servidor
-        if not name or not email or not age or not password or not gender or terms != "on":
-            flash("Por favor, llena todos los campos correctamente.")
-            return redirect(url_for("form"))
-        
-        if not email.endswith("@example.com"):
-            flash("El correo electrónico debe pertenecer al dominio @example.com.")
-            return redirect(url_for("form"))
-        
-        # Si todo es válido, redirigir a la página de inicio
-        flash("¡Formulario enviado correctamente!")
-        return redirect(url_for("index"))
-    return render_template("form.html")
+    # Validación: Si falta algún campo, redirige a error 400
+    if not name or not email or not birthdate or not gender:
+        return render_template("400.html"), 400  # Retorna código de error 400 (Bad Request)
 
-# Página de error personalizada
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template("error.html", error="Página no encontrada"), 404
+    return render_template("success.html", name=name)
 
-if __name__ == "__main__":
+@app.errorhandler(400)
+def bad_request_error(error):
+    return render_template("400.html"), 400
+
+if __name__ == '__main__':
     app.run(debug=True)
