@@ -2,14 +2,13 @@
 
 {% block title %}Inicio{% endblock %}
 
-{% block breadcrumbs %}Inicio{% endblock %}
-
 {% block content %}
 <section class="hero">
     <div class="hero-content">
-        <h1>Bienvenido a <span>Flask App</span></h1>
+        <h2>Bienvenido a Flask App</h2>
         <p>Explora nuestro formulario avanzado y disfruta de un diseño moderno.</p>
-        <a href="{{ url_for('form') }}" class="btn btn-primary">Ir al formulario</a>
+        <a href="{{ url_for('form') }}" class="button">Ir al formulario</a>
     </div>
 </section>
 {% endblock %}
+
