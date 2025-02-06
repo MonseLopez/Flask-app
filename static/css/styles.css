@@ -1,19 +1,14 @@
-/* Tipografía y reset */
+/* General */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    color: #333333;
-    background-color: #f8f9fa;
+    color: #333;
+    background-color: #f4f8fb;
     line-height: 1.6;
 }
 
-h1, h2, p {
-    margin: 0;
-    padding: 0;
-}
-
-/* Estructura */
+/* Contenedor principal */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -22,51 +17,48 @@ h1, h2, p {
 
 /* Header */
 .header {
-    background-color: #ffffff;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, #007BFF, #28A745);
+    padding: 1rem 0;
+    color: white;
+    text-align: center;
 }
 
 .header .logo {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #4CAF50;
 }
 
+/* Navegación */
 .nav ul {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     list-style: none;
     gap: 1.5rem;
+    padding: 0;
 }
 
 .nav ul li a {
     text-decoration: none;
-    color: #007BFF;
+    color: white;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .nav ul li a:hover {
-    color: #0056b3;
+    text-decoration: underline;
 }
 
 /* Hero */
 .hero {
     text-align: center;
     padding: 4rem 0;
-    background: linear-gradient(135deg, #4CAF50, #007BFF);
+    background: linear-gradient(135deg, #007BFF, #28A745);
     color: white;
 }
 
 .hero h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-}
-
-.hero h1 span {
-    color: #FF6F61;
 }
 
 .hero p {
@@ -76,7 +68,7 @@ h1, h2, p {
 
 .hero .btn {
     padding: 0.8rem 1.5rem;
-    background-color: #ffffff;
+    background-color: white;
     color: #007BFF;
     text-decoration: none;
     font-weight: bold;
@@ -89,12 +81,12 @@ h1, h2, p {
     color: white;
 }
 
-/* Footer */
-.footer {
-    background-color: #4CAF50;
-    color: white;
-    padding: 1rem 0;
-    text-align: center;
+/* Breadcrumbs */
+.breadcrumbs {
+    background: #e9f5ec;
+    padding: 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
 }
 
 /* Formulario */
@@ -106,6 +98,11 @@ h1, h2, p {
     margin-top: 2rem;
 }
 
+.form h2 {
+    color: #007BFF;
+    text-align: center;
+}
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -114,7 +111,7 @@ h1, h2, p {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
-    color: #333333;
+    color: #333;
 }
 
 .form-group input,
@@ -148,7 +145,7 @@ h1, h2, p {
 }
 
 .btn-submit {
-    background-color: #4CAF50;
+    background-color: #28A745;
     color: white;
     font-size: 1rem;
     border: none;
@@ -156,18 +153,13 @@ h1, h2, p {
 }
 
 .btn-submit:hover {
-    background-color: #388E3C;
+    background-color: #1e7e34;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .nav ul {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
+/* Footer */
+.footer {
+    background-color: #007BFF;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
 }

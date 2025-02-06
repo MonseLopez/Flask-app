@@ -24,21 +24,12 @@
         <div class="breadcrumbs">
             {% block breadcrumbs %}Inicio{% endblock %}
         </div>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="flash-messages">
-            {% for message in messages %}
-            <div class="alert">{{ message }}</div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% endwith %}
         {% block content %}{% endblock %}
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>© 2025 Flask App creada por MonseL ❤️ </p>
+            <p>© 2025 Flask App creada por MonseL ❤️</p>
         </div>
     </footer>
 </body>

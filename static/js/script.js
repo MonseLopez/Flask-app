@@ -1,8 +1,13 @@
-document.getElementById("advancedForm").addEventListener("submit", function (e) {
-    const age = document.getElementById("age").value;
+function validarFormulario() {
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let birthdate = document.getElementById("birthdate").value.trim();
+    let gender = document.getElementById("gender").value.trim();
 
-    if (age < 18 || age > 100) {
-        e.preventDefault();
-        alert("Por favor, ingresa una edad válida (18-100 años).");
+    if (!name || !email || !birthdate || !gender) {
+        alert("Todos los campos son obligatorios.");
+        return false;
     }
-});
+
+    return true;
+}

@@ -4,20 +4,23 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('form.html')
+    return render_template('index.html')
 
-@app.route('/form', methods=['POST'])
+@app.route('/form', methods=['GET', 'POST'])
 def form():
-    name = request.form.get('name')
-    email = request.form.get('email')
-    birthdate = request.form.get('birthdate')
-    gender = request.form.get('gender')
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        birthdate = request.form.get('birthdate')
+        gender = request.form.get('gender')
 
-    # Validación: Si falta algún campo, redirige a error 400
-    if not name or not email or not birthdate or not gender:
-        return render_template("400.html"), 400  # Retorna código de error 400 (Bad Request)
+        # Validación: Si falta algún campo, redirige a error 400
+        if not name or not email or not birthdate or not gender:
+            return render_template("400.html"), 400  # Retorna código de error 400 (Bad Request)
 
-    return render_template("success.html", name=name)
+        return render_template("success.html", name=name)
+
+    return render_template('form.html')
 
 @app.errorhandler(400)
 def bad_request_error(error):
