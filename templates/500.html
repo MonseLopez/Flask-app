@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Error 500 - Error Interno del Servidor{% endblock %}
+
+{% block content %}
+<div class="error-page">
+    <h2>🔥 Error 500 - Problema en el servidor</h2>
+    <p>Lo sentimos, ocurrió un problema interno en el servidor. Estamos trabajando en ello.</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Volver al inicio</a>
+</div>
+{% endblock %}

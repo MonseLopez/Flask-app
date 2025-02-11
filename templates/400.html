@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Error 400{% endblock %}
+{% block title %}Error 400 - Solicitud Incorrecta{% endblock %}
 
 {% block content %}
-    <h2>Error 400 - Solicitud incorrecta</h2>
-    <p>Por favor, completa todos los campos del formulario.</p>
-    <a href="{{ url_for('index') }}">Volver al inicio</a>
+<div class="error-page">
+    <h2>❌ Error 400 - Solicitud Incorrecta</h2>
+    <p>Lo sentimos, la solicitud no se pudo procesar debido a un error en los datos enviados.</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Volver al inicio</a>
+</div>
 {% endblock %}
