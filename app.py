@@ -1,6 +1,20 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuarios.db'  # Base de datos local
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = '12345678'
+
+db = SQLAlchemy(app)
+
+class Usuario(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    fecha_nacimiento = db.Column(db.String(10), nullable=False)
+    genero = db.Column(db.String(10), nullable=False)
 
 @app.route('/')
 def index():
@@ -9,31 +23,28 @@ def index():
 @app.route('/form', methods=['GET', 'POST'])
 def form():
     if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        birthdate = request.form.get('birthdate')
-        gender = request.form.get('gender')
+        nombre = request.form['name']
+        email = request.form['email']
+        fecha_nacimiento = request.form['birthdate']
+        genero = request.form['gender']
+        
+        nuevo_usuario = Usuario(nombre=nombre, email=email, fecha_nacimiento=fecha_nacimiento, genero=genero)
+        db.session.add(nuevo_usuario)
+        db.session.commit()
+        flash('Usuario registrado con éxito', 'success')
+        return redirect(url_for('usuarios'))
+    return render_template('form.html')
 
-        # Validación: Si falta algún campo, muestra error 400
-        if not name or not email or not birthdate or not gender:
-            return render_template("400.html"), 400  # Error 400 - Bad Request
-
-        return render_template("success.html", name=name)
-
-    return render_template("form.html")
-
-# Manejo de errores personalizados
-@app.errorhandler(400)
-def bad_request_error(error):
-    return render_template("400.html"), 400
+@app.route('/usuarios')
+def usuarios():
+    usuarios = Usuario.query.all()
+    return render_template("usuarios.html", usuarios=usuarios)
 
 @app.errorhandler(404)
-def not_found_error(error):
-    return render_template("404.html"), 404
-
-@app.errorhandler(500)
-def internal_server_error(error):
-    return render_template("500.html"), 500
+def page_not_found(error):
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()  # Crea la base de datos si no existe
     app.run(debug=True)
